@@ -1,0 +1,66 @@
+{
+  "name": "VSCode-MAUI-Archive",
+  "publisher": "banditoth",
+  "displayName": ".NET MAUI - Archive / Publish tool",
+  "version": "0.1.2",
+  "description": "VSCode extension for .NET MAUI Archiving applications",
+  "icon": "icon.png",
+  "author": {
+    "name": "banditoth",
+    "email": "support@banditoth.net"
+  },
+  "keywords": [
+    "MAUI",
+    ".NET MAUI",
+    "Archive",
+    "Publish",
+    "Xamarin",
+    "Xamarin.Forms",
+    "Android",
+    "iOS"
+  ],
+  "license": "GNU GPLv3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/banditoth/maui-archiver-vscode/"
+  },
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./extension.js",
+  "activationEvents": [
+    "onStartup"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "banditoth-maui-archive.publishAndroid",
+        "title": "MAUI Archive: Publish Android"
+      },
+      {
+        "command": "banditoth-maui-archive.publishiOS",
+        "title": "MAUI Archive: Publish iOS"
+      },
+      {
+        "command": "banditoth-maui-archive.listProvisioningProfiles",
+        "title": "MAUI Archive: iOS - List of provisioning profiles"
+      },
+      {
+        "command": "banditoth-maui-archive.listKeystores",
+        "title": "MAUI Archive: Android - List of Keystores & Check signature"
+      },
+      {
+        "command": "banditoth-maui-archive.generateCodeSigningKey",
+        "title": "MAUI Archive: Android - Generate code signing key"
+      },
+      {
+        "command": "banditoth-maui-archive.openSettings",
+        "title": "MAUI Archive: Settings"
+      }
+    ]
+  },
+  "private": true
+}
