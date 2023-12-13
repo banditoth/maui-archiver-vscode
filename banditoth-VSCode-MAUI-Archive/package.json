@@ -60,7 +60,18 @@
         "command": "banditoth-maui-archive.openSettings",
         "title": "MAUI Archive: Settings"
       }
-    ]
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "MAUI Archive",
+      "properties": {
+        "VSCode-MAUI-Archive.androidKeystoreDirectory": {
+          "type": "string",
+          "default": null,
+          "description": "Set a custom directory where your Android keystores are located at. Leave blank for default."
+        }
+      }
+    }
   },
   "private": true
 }

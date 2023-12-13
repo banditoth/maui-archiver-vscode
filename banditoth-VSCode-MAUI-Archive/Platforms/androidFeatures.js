@@ -105,7 +105,7 @@ async function invokeKeytoolWithResult(command) {
 /// Displays a selection dialog with the available keystore files.
 /// </summary>
 async function showPickerForKeystore() {
-    let androidKeystoreListPath = commonFeatures.getDefaultXamarinFolder();
+    let androidKeystoreListPath = commonFeatures.getCurrentKeystoreFolder();
 
     const keystoreFiles = await getKeystoresFromFolder(androidKeystoreListPath);
 
