@@ -12,21 +12,34 @@ module.exports = {
 }
 
 /// <summary>
-/// Returns the available keystore files in the specified folder.
+/// Returns the available keystore files in the specified folder and its subfolders.
 /// </summary>
-async function getKeystoresFromFolder(keystoreListPath) {
+function getKeystoresFromFolder(keystoreListPath) {
     return new Promise((resolve, reject) => {
-        vscode.workspace.fs.readDirectory(vscode.Uri.file(keystoreListPath)).then(
-            files => {
-                const keystoreFiles = files
-                    .filter(file => file[1] === vscode.FileType.File && file[0].endsWith('.keystore'))
-                    .map(file => file[0]);
-                resolve(keystoreFiles);
-            },
-            error => {
+        const keystoreFiles = [];
+
+        async function processFolder(folderUri) {
+            try {
+                const files = await vscode.workspace.fs.readDirectory(folderUri);
+
+                for (const [name, type] of files) {
+                    const filePath = path.join(folderUri.fsPath, name);
+
+                    if (type === vscode.FileType.File && name.endsWith('.keystore')) {
+                        keystoreFiles.push(filePath);
+                    } else if (type === vscode.FileType.Directory) {
+                        await processFolder(vscode.Uri.file(filePath));
+                    }
+                }
+            } catch (error) {
+                console.error('Error reading directory:', error);
                 reject(error);
             }
-        );
+        }
+
+        processFolder(vscode.Uri.file(keystoreListPath)).then(() => {
+            resolve(keystoreFiles);
+        });
     });
 }
 
