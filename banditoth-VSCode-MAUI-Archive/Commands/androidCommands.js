@@ -113,7 +113,7 @@ async function generateCodeSigningKey() {
         return;
     }
 
-    const keyPassword = await androidFeatures.promptForKeyPassword();
+    const keyPassword = await androidFeatures.promptForKeystorePassword();
     if (!keyPassword || keyPassword.length < 6) {
         vscode.window.showWarningMessage('Key password must be at least 6 characters.');
         return;
