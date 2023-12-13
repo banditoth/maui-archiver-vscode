@@ -69,7 +69,7 @@ function getCurrentKeystoreFolder() {
     }
 
     if (isWindows()) {
-        return '%APPDATA%/Local/Xamarin/Mono for Android/Keystore/';
+        return path.join(require('os').homedir(), '/AppData/Local/Xamarin/Mono for Android/Keystore/');
     } else if (isMacOS()) {
         return path.join(require('os').homedir(), '.local/share/Xamarin/Mono for Android/');
     } else {
