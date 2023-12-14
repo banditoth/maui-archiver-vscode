@@ -72,7 +72,7 @@ async function listKeystores() {
     const selectedKeystore = await androidFeatures.showPickerForKeystore();
 
     if (selectedKeystore) {
-        const keystoreFilePath = path.join(commonFeatures.getDefaultXamarinFolder(), selectedKeystore);
+        const keystoreFilePath = path.join(commonFeatures.getCurrentKeystoreFolder(), selectedKeystore);
 
         let keyPassword = await vscode.window.showInputBox({
             prompt: 'Enter the password for the signing key',
@@ -119,7 +119,7 @@ async function generateCodeSigningKey() {
         return;
     }
 
-    const keystoreDirectory = commonFeatures.getDefaultXamarinFolder();
+    const keystoreDirectory = commonFeatures.getCurrentKeystoreFolder();
     const keystorePath = path.join(keystoreDirectory, `${keyName}.keystore`);
 
     const name = await vscode.window.showInputBox({

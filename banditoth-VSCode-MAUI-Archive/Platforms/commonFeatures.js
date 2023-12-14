@@ -8,7 +8,7 @@ module.exports = {
     isLinux: isLinux,
     isWindows: isWindows,
     getRuntimePlatform: getRuntimePlatform,
-    getDefaultXamarinFolder: getDefaultXamarinFolder,
+    getCurrentKeystoreFolder: getCurrentKeystoreFolder,
     selectCsprojFile: selectProjectOrSolution
 };
 
@@ -62,9 +62,14 @@ function getRuntimePlatform() {
 /// <summary>
 /// Returns the path to the default Xamarin folder.
 /// </summary>
-function getDefaultXamarinFolder() {
+function getCurrentKeystoreFolder() {
+    let customFolder = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('androidKeystoreDirectory');
+    if (customFolder) {
+        return customFolder;
+    }
+
     if (isWindows()) {
-        return 'C:\\ProgramData\\Xamarin\\Mono for Android\\';
+        return path.join(require('os').homedir(), '/AppData/Local/Xamarin/Mono for Android/Keystore/');
     } else if (isMacOS()) {
         return path.join(require('os').homedir(), '.local/share/Xamarin/Mono for Android/');
     } else {
@@ -77,7 +82,7 @@ function getDefaultXamarinFolder() {
 /// </summary>
 /// <returns>The path to the selected csproj file.</returns>
 async function selectProjectOrSolution() {
-   const workspacePath = vscode.workspace.rootPath;
+    const workspacePath = vscode.workspace.rootPath;
 
     if (!workspacePath) {
         vscode.window.showErrorMessage('No workspace opened.');

@@ -12,7 +12,7 @@ function activate(context) {
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.publishAndroid', androidCommands.publishAndroid));
 
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.openSettings', () => {
-    vscode.commands.executeCommand('workbench.action.openSettings', 'MAUI Archive');
+    vscode.commands.executeCommand('workbench.action.openSettings', '@ext:banditoth.VSCode-MAUI-Archive');
   }));
 
   console.log('Extension activated.');
