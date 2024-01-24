@@ -99,7 +99,7 @@ async function selectProjectOrSolution() {
 
             if (fs.statSync(filePath).isDirectory()) {
                 findSolutionOrProjectFiles(filePath);
-            } else if (file.endsWith('.csproj') || file.endsWith('.sln')) {
+            } else if (file.endsWith('.csproj')) {
                 solutionOrProjectFiles.push(path.relative(workspacePath, filePath));
             }
         });

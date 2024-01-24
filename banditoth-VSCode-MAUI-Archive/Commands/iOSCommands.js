@@ -4,6 +4,7 @@ const commonFeatures = require('../Platforms/commonFeatures');
 
 module.exports = {
     listProvisioningProfiles: listProvisioningProfiles,
+    listSigningIdentities: listSigningIdentities, 
     publishiOS: publishiOS
 };
 
@@ -18,8 +19,24 @@ async function listProvisioningProfiles() {
 
     const provisioningProfiles = await iOSFeatures.getProvisioningProfiles();
 
-    await vscode.window.showQuickPick(provisioningProfiles, {
+    await vscode.window.showQuickPick(provisioningProfiles.map(profile => profile.name), {
         placeHolder: 'Available provisioning profiles'
+    });
+}
+
+/// <summary>
+/// Lists the available signing identities.
+/// </summary>
+async function listSigningIdentities() {
+    if (commonFeatures.isMacOS() === false) {
+        vscode.window.showErrorMessage('This command only works on macOS.');
+        return;
+    }
+
+    const signingIdentities = await iOSFeatures.getSigningIdentities();
+
+    await vscode.window.showQuickPick(signingIdentities, {
+        placeHolder: 'Available signing identities'
     });
 }
 
@@ -38,22 +55,24 @@ async function publishiOS() {
         return;
     }
 
-    const provisioningProfiles = await iOSFeatures.getProvisioningProfiles();
-    const selectedProvisioningProfile = await vscode.window.showQuickPick(provisioningProfiles, {
-        placeHolder: 'Select a provisioning profile'
-    });
+    const signingIdentities = await iOSFeatures.getSigningIdentities();
 
-    if (!selectedProvisioningProfile) {
+    const selectedSigningKey = await vscode.window.showQuickPick(signingIdentities,
+    {
+        placeHolder: 'Select a signing identity'
+    });
+    
+    if (!selectedSigningKey) {
         return;
     }
-
-    const signingKeys = await iOSFeatures.getKeysByProvisioningProfile(selectedProvisioningProfile);
-
-    const selectedSigningKey = await vscode.window.showQuickPick(signingKeys, {
-        placeHolder: 'Select a signing key'
+    
+    const provisioningProfiles = await iOSFeatures.getProvisioningProfiles();
+    
+    const selectedProvisioningProfile = await vscode.window.showQuickPick(provisioningProfiles.map(profile => profile.name), {
+        placeHolder: 'Select a provisioning profile'
     });
-
-    if (!selectedSigningKey) {
+    
+    if (!selectedProvisioningProfile) {
         return;
     }
 
