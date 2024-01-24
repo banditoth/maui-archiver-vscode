@@ -84,3 +84,8 @@ For major changes, please open a discussion first.
 
 ## Icon
 <a href="https://www.flaticon.com/free-icons/iphone" title="iphone icons">Iphone icons created by khulqi Rosyid - Flaticon</a>
+
+### Acknowledgements
+
+Thanks to Gerald Versluis for spreading the word about this tool.
+
