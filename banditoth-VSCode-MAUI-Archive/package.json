@@ -49,6 +49,10 @@
         "title": "MAUI Archive: iOS - List of provisioning profiles"
       },
       {
+        "command": "banditoth-maui-archive.listSigningIdentities",
+        "title": "MAUI Archive: iOS - List of signing identities"
+      },
+      {
         "command": "banditoth-maui-archive.listKeystores",
         "title": "MAUI Archive: Android - List of Keystores & Check signature"
       },

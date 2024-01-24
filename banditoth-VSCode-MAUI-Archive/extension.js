@@ -5,6 +5,7 @@ const androidCommands = require('./Commands/androidCommands');
 function activate(context) {
   // iOS Commands
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.listProvisioningProfiles', iOSCommands.listProvisioningProfiles));
+  context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.listSigningIdentities', iOSCommands.listSigningIdentities));
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.publishiOS', iOSCommands.publishiOS));
   // Android Commands
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.listKeystores', androidCommands.listKeystores));

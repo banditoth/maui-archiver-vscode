@@ -1,97 +1,79 @@
 const { exec } = require('child_process');
+const path = require('path');
+const fs = require('fs');
 
 module.exports = {
-    getProvisioningProfiles: getProvisioningProfiles,
-    getKeysByProvisioningProfile: getKeysByProvisioningProfile,
-    getAllCodeSigningInfo: getAllCodeSigningInfo,
-    getProfilesForSigningKey: getProfilesForSigningKey,
-    parseCodeSigningInfo: parseCodeSigningInfo,
+    getSigningIdentities: getSigningIdentities,
+    getProvisioningProfiles: getProvisioningProfiles
 }
 
-/// <summary>
-/// Returns the available provisioning profiles.
-/// </summary>
-// todo: simplify this, and make it more generic
-async function getProvisioningProfiles() {
+function getSigningIdentities() {
     return new Promise((resolve, reject) => {
         exec('security find-identity -p codesigning -v', (error, stdout, stderr) => {
             if (error) {
-                console.error(`Error: ${error.message}`);
-                reject([]);
-                return;
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-                reject([]);
+                console.error(`Error executing command: ${error.message}`);
+                reject(error);
                 return;
             }
 
-            const info = parseCodeSigningInfo(stdout);
-            const provisioningProfiles = info.map(item => item.profile);
-            resolve(provisioningProfiles);
+            if (stderr) {
+                console.error(`Command stderr: ${stderr}`);
+                reject(stderr);
+                return;
+            }
+
+            const lines = stdout.split('\n');
+            const signingIdentities = [];
+
+            lines.forEach((line) => {
+                const match = line.match(/^\s*\d+\)\s+([0-9A-F]+)\s+"(.+)"$/);
+                if (match && match.length === 3) {
+                    const identity = match[2];
+                    signingIdentities.push(identity);
+                }
+            });
+
+            // Remove duplicates
+            const distinctSigningIdentities = [...new Set(signingIdentities)];
+
+            console.log('Distinct Signing Identities:', distinctSigningIdentities);
+            resolve(distinctSigningIdentities);
         });
     });
 }
 
-// todo: simplify this, and make it more generic
-async function getKeysByProvisioningProfile(provisioningProfile) {
-    const allSigningKeys = await getAllCodeSigningInfo();
-    const keysForProfile = allSigningKeys.filter(item => item.profiles.includes(provisioningProfile));
-    return keysForProfile.map(item => item.key);
-}
+function getProvisioningProfiles() {
+    const provisioningProfilesPath = path.join(process.env.HOME, 'Library', 'MobileDevice', 'Provisioning Profiles');
 
-// todo: simplify this, and make it more generic
-async function getAllCodeSigningInfo() {
-    return new Promise((resolve, reject) => {
-        exec('security find-identity -p codesigning -v', (error, stdout, stderr) => {
-            if (error) {
-                console.error(`Error: ${error.message}`);
-                reject([]);
-                return;
-            }
-            if (stderr) {
-                console.error(`stderr: ${stderr}`);
-                reject([]);
-                return;
-            }
+    try {
+        const files = fs.readdirSync(provisioningProfilesPath);
 
-            const info = parseCodeSigningInfo(stdout);
-            const signingKeys = info.map(item => ({ key: item.thumbprint, profiles: [] }));
+        const profiles = files.map((file) => {
+            const filePath = path.join(provisioningProfilesPath, file);
+            try {
+                const content = fs.readFileSync(filePath, 'utf-8');
+                const expirationDateMatch = content.match(/<key>ExpirationDate<\/key>\s*<date>([^<]+)<\/date>/);
+                const nameMatch = content.match(/<key>Name<\/key>\s*<string>([^<]+)<\/string>/);
 
-            for (const keyInfo of signingKeys) {
-                keyInfo.profiles = getProfilesForSigningKey(keyInfo.key, info);
+                if (expirationDateMatch && expirationDateMatch[1] && nameMatch && nameMatch[1]) {
+                    const expirationDate = new Date(expirationDateMatch[1]);
+                    const name = nameMatch[1];
+
+                    const currentDate = new Date();
+                    if (expirationDate > currentDate) {
+                        return { name, expirationDate };
+                    }
+                }
+            } catch (error) {
+                console.error(`Error reading or parsing file ${filePath}: ${error.message}`);
             }
 
-            resolve(signingKeys);
-        });
-    });
-}
+            return null;
+        }).filter(Boolean);
 
-function getProfilesForSigningKey(signingKey, allCodeSigningInfo) {
-    const profiles = [];
-    for (const item of allCodeSigningInfo) {
-        if (item.thumbprint === signingKey) {
-            profiles.push(item.profile);
-        }
+        return profiles;
+    } catch (error) {
+        console.error(`Error reading provisioning profiles: ${error.message}`);
+        return [];
     }
-    return profiles;
-}
-
-/// <summary>
-/// Magicly parses the output of the security command.
-/// </summary>
-function parseCodeSigningInfo(output) {
-    const lines = output.split('\n');
-    const info = [];
-
-    for (const line of lines) {
-        const match = line.match(/^\s*\d+\)\s+(\S+)\s+"(.+)"$/);
-        if (match) {
-            const thumbprint = match[1];
-            const profile = match[2];
-            info.push({ thumbprint, profile });
-        }
-    }
-
-    return info;
 }
