@@ -19,7 +19,7 @@
     "Android",
     "iOS"
   ],
-  "license": "GNU GPLv3",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/banditoth/maui-archiver-vscode/"
