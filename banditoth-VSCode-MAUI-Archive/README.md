@@ -1,13 +1,31 @@
+<img src="icon.png" width="120" height="120"/>
+
 # .NET MAUI - Archive / Publish tool
+
+![GitHub License](https://img.shields.io/github/license/banditoth/maui-archiver-vscode?style=for-the-badge)
+
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/banditoth.VSCode-MAUI-Archive?style=for-the-badge&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Dbanditoth.VSCode-MAUI-Archive)
+
+![GitHub issues](https://img.shields.io/github/issues/banditoth/maui-archiver-vscode?style=for-the-badge)
 
 The .NET MAUI - Archive / Publish tool extension for Visual Studio Code provides a set of essential tools to streamline the process of packaging and publishing .NET MAUI (Multi-platform App UI) projects. 
 Whether you're targeting Android, iOS, or Windows platforms, this extension equips you with the necessary tools to manage provisioning profiles, keystore files.
 
-** This project is currently under active development **
+## Supported platforms
 
-## Availability
+| Android | iOS | Windows | MacCatalyst | Tizen |
+| --- | --- | --- | --- | --- | 
+| ✅ (macOS/Windows) | ✅ (macOS only) | Planned in Q1-2024 | Planned in Q2-2024 | ⛔️ |
 
-https://marketplace.visualstudio.com/items?itemName=banditoth.VSCode-MAUI-Archive
+## Roadmap
+
+Q1 - 2024: 
+- Windows publishing support
+- Direct upload to Google Play
+- Direct upload to TestFlight / AppStore
+
+Q2 - 2024:
+- MacCatalyst publish
 
 ## Installation
 
@@ -15,6 +33,13 @@ https://marketplace.visualstudio.com/items?itemName=banditoth.VSCode-MAUI-Archiv
 - Go to the Extensions view (Ctrl+Shift+X).
 - Search for ".NET MAUI - Archive / Publish tool"
 - Click "Install" to add the extension to your VS Code setup.
+
+## Visual Studio marketplace
+
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/banditoth.VSCode-MAUI-Archive?style=for-the-badge&link=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Dbanditoth.VSCode-MAUI-Archive)
+
+Find it here:
+https://marketplace.visualstudio.com/items?itemName=banditoth.VSCode-MAUI-Archive
 
 ## Usage
 
@@ -58,4 +83,4 @@ Pull requests are welcomed.
 For major changes, please open a discussion first.
 
 ## Icon
-<a href="https://www.flaticon.com/free-icons/rocket-launch" title="rocket launch icons">Rocket launch icons created by Hamstring - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/iphone" title="iphone icons">Iphone icons created by khulqi Rosyid - Flaticon</a>
