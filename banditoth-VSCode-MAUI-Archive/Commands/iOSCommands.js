@@ -76,8 +76,15 @@ async function publishiOS() {
         return;
     }
 
+    let runtimeIdentifier = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('iOSRuntimeIdentifier');
+    let iOSVersion = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('useExplicitiOSVersion');
+
+    if(iOSVersion === null){
+        iOSVersion = '';
+    }
+
     // Removed output path for now -o "${outputPath}"
-    const dotnetCommand = `dotnet publish "${csprojPath}" -f net8.0-ios -c Release -p:ArchiveOnBuild=true -p:RuntimeIdentifier=ios-arm64  -p:CodesignKey="${selectedSigningKey}" -p:CodesignProvision="${selectedProvisioningProfile}"`;
+    const dotnetCommand = `dotnet publish "${csprojPath}" -f ${commonFeatures.getDotnetVersion()}-ios${iOSVersion} -c ${commonFeatures.getBuildConfiguration()} -p:ArchiveOnBuild=true -p:RuntimeIdentifier=${runtimeIdentifier}  -p:CodesignKey="${selectedSigningKey}" -p:CodesignProvision="${selectedProvisioningProfile}"`;
     commonFeatures.executeCommandInTerminal(dotnetCommand);
 }
 
