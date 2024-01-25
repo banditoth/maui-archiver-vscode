@@ -75,16 +75,55 @@
       {
         "command": "banditoth-maui-archive.windowsTutorial",
         "title": "MAUI Archive: Documentation of publishing Windows apps (Microsoft)"
+      },
+      {
+        "command": "banditoth-maui-archive.publishWindows",
+        "title": "MAUI Archive: Publish Windows"
       }
     ],
     "configuration": {
       "type": "object",
       "title": "MAUI Archive",
       "properties": {
+        "VSCode-MAUI-Archive.buildConfiguration": {
+          "type": "string",
+          "default": "Release",
+          "description": "Determines the build configuration for the dotnet publish command"
+        },
+        "VSCode-MAUI-Archive.dotnetVersion": {
+          "type": "string",
+          "default": "net8.0",
+          "description": "Determines dotnet version to use"
+        },
+        "VSCode-MAUI-Archive.enableSolutionFileFormat": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enables whether the extension should search for .sln files too (not just only .csproj)."
+        },
         "VSCode-MAUI-Archive.androidKeystoreDirectory": {
           "type": "string",
           "default": null,
           "description": "Set a custom directory where your Android keystores are located at. Leave blank for default."
+        },
+        "VSCode-MAUI-Archive.useExplicitAndroidVersion": {
+          "type": "string",
+          "default": null,
+          "description": "Set a custom Android version as target framework. Example-excepted: net8.0-android33 Value should be '33'. Leave blank for default."
+        },
+        "VSCode-MAUI-Archive.iOSRuntimeIdentifier": {
+          "type": "string",
+          "default": "ios-arm64",
+          "description": "Determines the default runtime identifier for iOS. Example: ios-arm64"
+        },
+        "VSCode-MAUI-Archive.useExplicitiOSVersion": {
+          "type": "string",
+          "default": null,
+          "description": "Set a custom iOS version as target framework. Example-excepted: net8.0-ios13 Value should be '13'. Leave blank for default."
+        },
+        "VSCode-MAUI-Archive.useExplicitWindowsVersion": {
+          "type": "string",
+          "default": "10.0.19041.0",
+          "description": "Determines the windows version for the dotnet publish command. Example-excepted: net8.0-windows10.0.19041.0 Value should be: '10.0.19041.0'"
         }
       }
     }

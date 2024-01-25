@@ -56,7 +56,13 @@ async function publishAndroid() {
         return;
     }
 
-    let dotnetCommand = `dotnet publish "${csprojPath}" -f net8.0-android -c Release -p:AndroidPackageFormat=${packageFormat}`;
+    let androidVersion = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('useExplicitAndroidVersion');
+
+    if(androidVersion === null){
+        androidVersion = '';
+    }
+
+    let dotnetCommand = `dotnet publish "${csprojPath}" -f ${commonFeatures.getDotnetVersion()}-android${androidVersion} -c ${commonFeatures.getBuildConfiguration()} -p:AndroidPackageFormat=${packageFormat}`;
 
     if (isSigningNeeded) {
         dotnetCommand += ` -p:AndroidKeyStore=true -p:AndroidSigningKeyStore="${keystorePath}" -p:AndroidSigningKeyAlias=${keyAlias} -p:AndroidSigningKeyPass=${keyPassword} -p:AndroidSigningStorePass=${keyPassword}`;

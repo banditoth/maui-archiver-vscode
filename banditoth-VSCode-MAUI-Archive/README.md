@@ -15,12 +15,11 @@ Whether you're targeting Android, iOS, or Windows platforms, this extension equi
 
 | Android | iOS | Windows | MacCatalyst | Tizen |
 | --- | --- | --- | --- | --- | 
-| ✅ (macOS/Windows) | ✅ (macOS only) | Planned in Q1-2024 | Planned in Q2-2024 | ⛔️ |
+| ✅ (macOS/Windows) | ✅ (macOS only) | ✅ (Windows only) | Planned in Q2-2024 | ⛔️ |
 
 ## Roadmap
 
 Q1 - 2024: 
-- Windows publishing support
 - Direct upload to Google Play
 - Direct upload to TestFlight / AppStore
 
@@ -48,11 +47,18 @@ https://marketplace.visualstudio.com/items?itemName=banditoth.VSCode-MAUI-Archiv
 
 ## Available commands
 
+### Publishing
+
 `MAUI Archive: Publish Android`
 Initiates the process of publishing a .NET MAUI app for the Android platform. Users can choose between signed and unsigned builds, apk and aab formats.
 
 `MAUI Archive: Publish iOS`
 Initiates the process of publishing a .NET MAUI app for the iOS platform. Users can choose signing profiles and keys.
+
+`MAUI Archive: Publish Windows`
+Initiates the process of publishing a .NET MAUI app for the Windows platform. Users can choose between packaged and non packaged apps.
+
+### Additional commands
 
 `MAUI Archive: iOS - List of Provisioning Profiles`
 Lists all available provisioning profiles installed on the machine for iOS projects.
@@ -63,14 +69,31 @@ Lists all keystores. Additionally, allows users to check the signature of a sele
 `MAUI Archive: Android - Generate Code Signing Key`
 Prompts the required paramters and executes the necessary command (`keytool -genkeypair`) to generate a code signing key for Android apps.
 
+### Tutorials
+
+`MAUI Archive: Documentation of publishing Android apps (Microsoft)`
+`MAUI Archive: Documentation of publishing iOS apps (Microsoft)`
+`MAUI Archive: Documentation of publishing Windows apps (Microsoft)`
+
+Opens the browser with additional information about the archive / publish process of each platform (learn.microsoft.com)
+
+### Settings
+
 `MAUI Archive: Settings`
 Opens the settings for the MAUI Archive extension, allowing users to configure parameters such as output paths and Android keystore list paths.
 
+#### Values
 
-## Planned features
-- Windows (UWP) publish process
-- Google Play integration
-- AppStore integration
+| Setting name | Description | Default Value |
+| --- | --- | --- |
+| Build configuration | You can specify a custom build configuration when publishing your apps | 'Release' |
+| Dotnet version | You can specify a custom dotnet version like net7.0 when publishing your apps | 'net8.0' |
+| Enable Solution file format | When searching the workspace for .csproj files, this setting enabled the discovery of .sln files aswell | 'false' |
+| Android keystore directory | You can specify a custom directory path to your Android keystore files | - |
+| Use explicit Android version | You can specify a custom version of Android to use as a target framework | - |
+| iOS Runtime identifier | You can change the default architeture for iOS apps | 'ios-arm64' |
+| Use explicit iOS version | You can specify a custom version of iOS to use as a target framework | - |
+| Use explicit Windows version | You can specify a custom version of Windows to use as a target framework. Always use a value, do not leave it blank | '10.0.19041.0' |
 
 ## Issues / feedback
 

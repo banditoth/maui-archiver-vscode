@@ -9,7 +9,9 @@ module.exports = {
     isWindows: isWindows,
     getRuntimePlatform: getRuntimePlatform,
     getCurrentKeystoreFolder: getCurrentKeystoreFolder,
-    selectCsprojFile: selectProjectOrSolution
+    selectCsprojFile: selectProjectOrSolution,
+    getBuildConfiguration: getBuildConfigurationFromSettings,
+    getDotnetVersion: getDotnetVersionFromSettings
 };
 
 /// <summary>
@@ -77,6 +79,16 @@ function getCurrentKeystoreFolder() {
     }
 }
 
+function getBuildConfigurationFromSettings(){
+    let buildConfig = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('buildConfiguration');
+        return buildConfig;
+}
+
+function getDotnetVersionFromSettings(){
+    let dotnetVersion = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('dotnetVersion');
+    return dotnetVersion;
+}
+
 /// <summary>
 /// Displays a selection dialog with the available csproj files.
 /// </summary>
@@ -92,6 +104,8 @@ async function selectProjectOrSolution() {
     const solutionOrProjectFiles = [];
 
     function findSolutionOrProjectFiles(dir) {
+        let enableSln = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('enableSolutionFileFormat', false);
+
         const files = fs.readdirSync(dir);
 
         files.forEach(file => {
@@ -99,7 +113,7 @@ async function selectProjectOrSolution() {
 
             if (fs.statSync(filePath).isDirectory()) {
                 findSolutionOrProjectFiles(filePath);
-            } else if (file.endsWith('.csproj')) {
+            } else if (file.endsWith('.csproj') || (enableSln && file.endsWith('.sln'))) {
                 solutionOrProjectFiles.push(path.relative(workspacePath, filePath));
             }
         });

@@ -1,6 +1,7 @@
 const vscode = require('vscode');
 const iOSCommands = require('./Commands/iOSCommands');
 const androidCommands = require('./Commands/androidCommands');
+const windowsCommands = require('./Commands/windowsCommands');
 
 function activate(context) {
   // iOS Commands
@@ -11,6 +12,8 @@ function activate(context) {
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.listKeystores', androidCommands.listKeystores));
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.generateCodeSigningKey', androidCommands.generateCodeSigningKey));
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.publishAndroid', androidCommands.publishAndroid));
+
+  context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.publishWindows', windowsCommands.publishWindows));
 
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.openSettings', () => {
     vscode.commands.executeCommand('workbench.action.openSettings', '@ext:banditoth.VSCode-MAUI-Archive');
