@@ -16,6 +16,18 @@ function activate(context) {
     vscode.commands.executeCommand('workbench.action.openSettings', '@ext:banditoth.VSCode-MAUI-Archive');
   }));
 
+  context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.androidTutorial', () => {
+    vscode.env.openExternal(vscode.Uri.parse("https://learn.microsoft.com/en-us/dotnet/maui/android/deployment/"));
+  }));
+
+  context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.iOSTutorial', () => {
+    vscode.env.openExternal(vscode.Uri.parse("https://learn.microsoft.com/en-us/dotnet/maui/ios/deployment/"));
+  }));
+
+  context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.windowsTutorial', () => {
+    vscode.env.openExternal(vscode.Uri.parse("https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/"));
+  }));
+
   console.log('Extension activated.');
 }
 

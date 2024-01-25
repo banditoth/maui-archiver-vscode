@@ -63,6 +63,18 @@
       {
         "command": "banditoth-maui-archive.openSettings",
         "title": "MAUI Archive: Settings"
+      },
+      {
+        "command": "banditoth-maui-archive.androidTutorial",
+        "title": "MAUI Archive: Documentation of publishing Android apps (Microsoft)"
+      },
+      {
+        "command": "banditoth-maui-archive.iOSTutorial",
+        "title": "MAUI Archive: Documentation of publishing iOS apps (Microsoft)"
+      },
+      {
+        "command": "banditoth-maui-archive.windowsTutorial",
+        "title": "MAUI Archive: Documentation of publishing Windows apps (Microsoft)"
       }
     ],
     "configuration": {
