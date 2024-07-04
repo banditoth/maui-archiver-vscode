@@ -126,5 +126,5 @@ async function showPickerForKeystore() {
         placeHolder: 'Select a keystore'
     });
 
-    return selectedKeystore ? path.join(androidKeystoreListPath, selectedKeystore) : null;
+    return selectedKeystore;
 }
