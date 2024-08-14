@@ -160,12 +160,10 @@ async function generateCodeSigningKey() {
         placeHolder: 'e.g., US'
     });
 
-    const keyToolFilePath = commonFeatures.getKeytoolPath();
-
-    const command = `"${keyToolFilePath}" -genkeypair -v -keystore "${keystorePath}" -alias "${keyName}" -keyalg RSA -keysize 2048 -validity 10000 -storepass "${keystorePassword}" -keypass "${keyPassword}" -dname "CN=${name}, OU=${organizationalUnit}, O=${organization}, L=${city}, ST=${state}, C=${country}"`;
+    const command = `-genkeypair -v -keystore "${keystorePath}" -alias "${keyName}" -keyalg RSA -keysize 2048 -validity 10000 -storepass "${keystorePassword}" -keypass "${keyPassword}" -dname "CN=${name}, OU=${organizationalUnit}, O=${organization}, L=${city}, ST=${state}, C=${country}"`;
 
     try {
-        await androidFeatures.executeKeytoolCommand(command);
+        await androidFeatures.invokeKeytoolWithResult(command);
     }
     catch {
         // always runs to this point

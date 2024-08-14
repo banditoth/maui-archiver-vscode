@@ -90,6 +90,7 @@ Opens the settings for the MAUI Archive extension, allowing users to configure p
 | Dotnet version | You can specify a custom dotnet version like net7.0 when publishing your apps | 'net8.0' |
 | Enable Solution file format | When searching the workspace for .csproj files, this setting enabled the discovery of .sln files aswell | 'false' |
 | Android keystore directory | You can specify a custom directory path to your Android keystore files | - |
+| Custom keytool path | You can specify a custom path to JDK's keytool binary. | - |
 | Use explicit Android version | You can specify a custom version of Android to use as a target framework | - |
 | iOS Runtime identifier | You can change the default architeture for iOS apps | 'ios-arm64' |
 | Use explicit iOS version | You can specify a custom version of iOS to use as a target framework | - |

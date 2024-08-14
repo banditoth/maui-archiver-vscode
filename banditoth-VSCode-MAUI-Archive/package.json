@@ -108,7 +108,7 @@
         "VSCode-MAUI-Archive.androidKeytoolPath": {
           "type": "string",
           "default": null,
-          "description": "Set a custom path to the keytool location. Leave blank for default which will use the JAVA_HOME environment variable."
+          "description": "Set a custom path to the keytool location. Leave blank for default which will use the keytool from %PATH%."
         },
         "VSCode-MAUI-Archive.useExplicitAndroidVersion": {
           "type": "string",

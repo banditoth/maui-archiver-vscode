@@ -11,7 +11,8 @@ module.exports = {
     getCurrentKeystoreFolder: getCurrentKeystoreFolder,
     selectCsprojFile: selectProjectOrSolution,
     getBuildConfiguration: getBuildConfigurationFromSettings,
-    getDotnetVersion: getDotnetVersionFromSettings
+    getDotnetVersion: getDotnetVersionFromSettings,
+    getKeytoolPath: getKeytoolPath
 };
 
 /// <summary>
@@ -85,7 +86,8 @@ function getKeytoolPath(){
         return customPath;
     }
 
-    return path.join(process.env.JAVA_HOME, 'bin', 'keytool');
+    // use it from %PATH%
+    return 'keytool';
 
 }
 
