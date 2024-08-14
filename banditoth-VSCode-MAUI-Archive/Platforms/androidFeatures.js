@@ -9,6 +9,7 @@ module.exports = {
     showPickerForKeystore: showPickerForKeystore,
     showPickerForAlias: showPickerForAlias,
     promptForKeystorePassword: promptForKeystorePassword,
+    invokeKeytoolWithResult: invokeKeytoolWithResult
 }
 
 /// <summary>
@@ -48,7 +49,7 @@ function getKeystoresFromFolder(keystoreListPath) {
 /// </summary>
 async function getKeystoreAliases(keystorePath, keystorePassword) {
     try {
-        const keystoreInfo = await invokeKeytoolWithResult(`keytool -list -keystore "${keystorePath}" -storepass "${keystorePassword}"`);
+        const keystoreInfo = await invokeKeytoolWithResult(`-list -keystore "${keystorePath}" -storepass "${keystorePassword}"`);
         const aliasMatches = keystoreInfo.match(/Alias name: (.+)/g);
 
         if (!aliasMatches) {
@@ -97,9 +98,10 @@ async function showPickerForAlias(keystorePath, keyPassword) {
 /// <summary>
 /// Invokes the keytool command with the specified arguments in the background and returns the result of the invocation.
 /// </summary>
-async function invokeKeytoolWithResult(command) {
+async function invokeKeytoolWithResult(parameters) {
     return new Promise((resolve, reject) => {
-        exec(command, (error, stdout, stderr) => {
+        const keyToolFilePath = commonFeatures.getKeytoolPath();
+        exec(`${keyToolFilePath} ${parameters}`, (error, stdout, stderr) => {
             if (error) {
                 reject(new Error(`Error executing keytool command: ${error.message}`));
                 return;
