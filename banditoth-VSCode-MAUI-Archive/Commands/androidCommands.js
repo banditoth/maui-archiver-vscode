@@ -89,7 +89,9 @@ async function listKeystores() {
             return;
         }
 
-        await exec(`keytool -list -keystore "${keystoreFilePath}" -storepass "${keyPassword}"`, (err, stdout, stderr) => {
+        const keyToolFilePath = commonFeatures.getKeytoolPath();
+
+        await exec(`"${keyToolFilePath}" -list -keystore "${keystoreFilePath}" -storepass "${keyPassword}"`, (err, stdout, stderr) => {
             if (err) {
                 vscode.window.showErrorMessage(`Error checking signature for ${keystoreFilePath}: ${stderr}`);
             } else {
@@ -158,7 +160,9 @@ async function generateCodeSigningKey() {
         placeHolder: 'e.g., US'
     });
 
-    const command = `keytool -genkeypair -v -keystore "${keystorePath}" -alias "${keyName}" -keyalg RSA -keysize 2048 -validity 10000 -storepass "${keystorePassword}" -keypass "${keyPassword}" -dname "CN=${name}, OU=${organizationalUnit}, O=${organization}, L=${city}, ST=${state}, C=${country}"`;
+    const keyToolFilePath = commonFeatures.getKeytoolPath();
+
+    const command = `"${keyToolFilePath}" -genkeypair -v -keystore "${keystorePath}" -alias "${keyName}" -keyalg RSA -keysize 2048 -validity 10000 -storepass "${keystorePassword}" -keypass "${keyPassword}" -dname "CN=${name}, OU=${organizationalUnit}, O=${organization}, L=${city}, ST=${state}, C=${country}"`;
 
     try {
         await androidFeatures.executeKeytoolCommand(command);

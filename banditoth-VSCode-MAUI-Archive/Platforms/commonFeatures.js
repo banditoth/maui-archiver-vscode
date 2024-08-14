@@ -79,6 +79,16 @@ function getCurrentKeystoreFolder() {
     }
 }
 
+function getKeytoolPath(){
+    let customPath = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('androidKeytoolPath');
+    if (customPath) {
+        return customPath;
+    }
+
+    return path.join(process.env.JAVA_HOME, 'bin', 'keytool');
+
+}
+
 function getBuildConfigurationFromSettings(){
     let buildConfig = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('buildConfiguration');
         return buildConfig;
