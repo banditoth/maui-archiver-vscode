@@ -129,6 +129,11 @@
           "type": "string",
           "default": "10.0.19041.0",
           "description": "Determines the windows version for the dotnet publish command. Example-excepted: net8.0-windows10.0.19041.0 Value should be: '10.0.19041.0'"
+        },
+        "VSCode-MAUI-Archive.iOSProvisioningProfilesPath": {
+          "type": "string",
+          "default": null,
+          "description": "Set a custom directory where your iOS Provisioning Profiles are located at. Leave blank for default. (Developer/XCode/UserData/ProvisioningProfiles)"
         }
       }
     }

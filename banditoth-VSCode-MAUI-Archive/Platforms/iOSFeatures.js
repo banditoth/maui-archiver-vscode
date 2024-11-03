@@ -1,6 +1,7 @@
 const { exec } = require('child_process');
 const path = require('path');
 const fs = require('fs');
+const commonFeatures = require('./commonFeatures');
 
 module.exports = {
     getSigningIdentities: getSigningIdentities,
@@ -43,7 +44,7 @@ function getSigningIdentities() {
 }
 
 function getProvisioningProfiles() {
-    const provisioningProfilesPath = path.join(process.env.HOME, 'Library', 'MobileDevice', 'Provisioning Profiles');
+    const provisioningProfilesPath = commonFeatures.getCurrentProvisioningProfilesFolder();
 
     try {
         const files = fs.readdirSync(provisioningProfilesPath);
