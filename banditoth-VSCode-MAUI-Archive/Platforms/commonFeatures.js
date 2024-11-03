@@ -9,6 +9,7 @@ module.exports = {
     isWindows: isWindows,
     getRuntimePlatform: getRuntimePlatform,
     getCurrentKeystoreFolder: getCurrentKeystoreFolder,
+    getCurrentProvisioningProfilesFolder: getCurrentProvisioningProfilesFolder,
     selectCsprojFile: selectProjectOrSolution,
     getBuildConfiguration: getBuildConfigurationFromSettings,
     getDotnetVersion: getDotnetVersionFromSettings,
@@ -78,6 +79,15 @@ function getCurrentKeystoreFolder() {
     } else {
         throw new Error(`Unsupported platform: ${process.platform}`);
     }
+}
+
+function getCurrentProvisioningProfilesFolder() {
+    let customFolder = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('iOSProvisioningProfilesPath');
+    if (customFolder) {
+        return customFolder;
+    }
+
+    return path.join(require('os').homedir(), 'Library', 'Developer', 'Xcode', 'UserData', 'Provisioning Profiles');
 }
 
 function getKeytoolPath(){
