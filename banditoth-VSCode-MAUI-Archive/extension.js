@@ -28,7 +28,7 @@ function activate(context) {
   }));
 
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.windowsTutorial', () => {
-    vscode.env.openExternal(vscode.Uri.parse("https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/"));
+    vscode.env.openExternal(vscode.Uri.parse("https://learn.microsoft.com/en-us/dotnet/maui/windows/deployment/overview"));
   }));
 
   console.log('Extension activated.');
