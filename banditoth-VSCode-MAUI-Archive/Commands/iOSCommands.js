@@ -57,13 +57,18 @@ async function publishiOS() {
 
     const signingIdentities = await iOSFeatures.getSigningIdentities();
 
-    const selectedSigningKey = await vscode.window.showQuickPick(signingIdentities,
+    let selectedSigningKey = await vscode.window.showQuickPick(signingIdentities,
     {
         placeHolder: 'Select a signing identity'
     });
     
     if (!selectedSigningKey) {
         return;
+    }
+
+    // Replace comma with %2C if it exists in the selectedSigningKey
+    if (selectedSigningKey.includes(',')) {
+        selectedSigningKey = selectedSigningKey.replace(/,/g, '%2C');
     }
     
     const provisioningProfiles = await iOSFeatures.getProvisioningProfiles();
