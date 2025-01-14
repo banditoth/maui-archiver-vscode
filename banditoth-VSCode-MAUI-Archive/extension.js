@@ -9,7 +9,7 @@ function activate(context) {
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.listSigningIdentities', iOSCommands.listSigningIdentities));
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.publishiOS', iOSCommands.publishiOS));
   // Android Commands
-  context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.listKeystores', androidCommands.listKeystores));
+  context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.checkKeyStoreSign', androidCommands.checkKeyStoreSign));
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.generateCodeSigningKey', androidCommands.generateCodeSigningKey));
   context.subscriptions.push(vscode.commands.registerCommand('banditoth-maui-archive.publishAndroid', androidCommands.publishAndroid));
 

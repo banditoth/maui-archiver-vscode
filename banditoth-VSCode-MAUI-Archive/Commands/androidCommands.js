@@ -7,7 +7,7 @@ const { exec } = require('child_process');
 
 module.exports = {
     publishAndroid: publishAndroid,
-    listKeystores: listKeystores,
+    checkKeyStoreSign: checkKeyStoreSign,
     generateCodeSigningKey: generateCodeSigningKey
 };
 
@@ -74,7 +74,7 @@ async function publishAndroid() {
 /// <summary>
 /// Selects a keystore file and checks its signature.
 /// </summary>
-async function listKeystores() {
+async function checkKeyStoreSign() {
     const selectedKeystore = await androidFeatures.showPickerForKeystore();
 
     if (selectedKeystore) {

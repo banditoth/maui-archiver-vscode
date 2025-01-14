@@ -50,15 +50,34 @@ function getKeystoresFromFolder(keystoreListPath) {
 async function getKeystoreAliases(keystorePath, keystorePassword) {
     try {
         const keystoreInfo = await invokeKeytoolWithResult(`-list -keystore "${keystorePath}" -storepass "${keystorePassword}"`);
-        const aliasMatches = keystoreInfo.match(/Alias name: (.+)/g);
 
-        if (!aliasMatches) {
-            vscode.window.showWarningMessage('No aliases found in the keystore.');
-            return [];
+        let jdkVersion = vscode.workspace.getConfiguration('VSCode-MAUI-Archive').get('androidJDKVersion');
+        if (jdkVersion === 'jdk17-') {
+            const aliasMatches = keystoreInfo.match(/Alias name: (.+)/g);
+
+            if (!aliasMatches) {
+                vscode.window.showWarningMessage('No aliases found in the keystore.');
+                return [];
+            }
+
+            const aliases = aliasMatches.map(match => match.split(':')[1].trim());
+            return aliases;
         }
+        else if (jdkVersion == 'jdk17+') {
+            const entryLines = keystoreInfo
+                .split('\n')
+                .filter(line => line.match(/, PrivateKeyEntry/));
 
-        const aliases = aliasMatches.map(match => match.split(':')[1].trim());
-        return aliases;
+            if (entryLines.length === 0) {
+                vscode.window.showWarningMessage('No aliases found in the keystore.');
+                return [];
+            }
+
+            const aliases = entryLines.map(line => line.split(',')[0].trim());
+            return aliases;
+        }
+        else
+            throw "UNKNOWN JDK VERSION SET IN SETTINGS"
     } catch (error) {
         vscode.window.showErrorMessage(`Error getting keystore aliases: ${error.message}`);
         return [];
@@ -84,6 +103,10 @@ async function showPickerForAlias(keystorePath, keyPassword) {
 
     if (keystoreAliases.length === 0) {
         return null;
+    }
+
+    if (keystoreAliases.length === 1) {
+        return keystoreAliases[0];
     }
 
     const selectedAlias = await vscode.window.showQuickPick(keystoreAliases, {
