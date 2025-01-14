@@ -78,8 +78,6 @@ async function listKeystores() {
     const selectedKeystore = await androidFeatures.showPickerForKeystore();
 
     if (selectedKeystore) {
-        const keystoreFilePath = path.join(commonFeatures.getCurrentKeystoreFolder(), selectedKeystore);
-
         let keyPassword = await vscode.window.showInputBox({
             prompt: 'Enter the password for the signing key',
             password: true
@@ -91,9 +89,10 @@ async function listKeystores() {
 
         const keyToolFilePath = commonFeatures.getKeytoolPath();
 
-        await exec(`"${keyToolFilePath}" -list -keystore "${keystoreFilePath}" -storepass "${keyPassword}"`, (err, stdout, stderr) => {
+        let command = `${keyToolFilePath} -list -keystore "${selectedKeystore}" -storepass "${keyPassword}"`;
+        await exec(command, (err, stdout, stderr) => {
             if (err) {
-                vscode.window.showErrorMessage(`Error checking signature for ${keystoreFilePath}: ${stderr}`);
+                vscode.window.showErrorMessage(`Error checking signature for ${selectedKeystore}: ${stderr}`);
             } else {
                 vscode.window.showInformationMessage(`Signature:\n${stdout}`);
             }
