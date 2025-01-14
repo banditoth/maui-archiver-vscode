@@ -53,8 +53,8 @@
         "title": "MAUI Archive: iOS - List of signing identities"
       },
       {
-        "command": "banditoth-maui-archive.listKeystores",
-        "title": "MAUI Archive: Android - List of Keystores & Check signature"
+        "command": "banditoth-maui-archive.checkKeyStoreSign",
+        "title": "MAUI Archive: Android - Check signature of a keystore file"
       },
       {
         "command": "banditoth-maui-archive.generateCodeSigningKey",
@@ -109,6 +109,19 @@
           "type": "string",
           "default": null,
           "description": "Set a custom path to the keytool location. Leave blank for default which will use the keytool from %PATH%."
+        },
+        "VSCode-MAUI-Archive.androidJDKVersion": {
+          "type": "string",
+          "default": "jdk17+",
+          "enum": [
+            "jdk17-",
+            "jdk17+"
+          ],
+          "enumDescriptions": [
+            "Microsoft OpenJDK 17 or earlier versions",
+            "Microsoft OpenJDK 17 or newer versions"
+          ],
+          "description": "Set the version for compatibility with Java Development kit. Get the version with 'java --version' Recommended: Microsoft OpenJDK 17 or up."
         },
         "VSCode-MAUI-Archive.useExplicitAndroidVersion": {
           "type": "string",
