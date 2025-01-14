@@ -15,15 +15,13 @@ Whether you're targeting Android, iOS, or Windows platforms, this extension equi
 
 | Android | iOS | Windows | MacCatalyst | Tizen |
 | --- | --- | --- | --- | --- | 
-| ✅ (macOS/Windows) | ✅ (macOS only) | ✅ (Windows only) | Planned in Q2-2024 | ⛔️ |
+| ✅ (macOS/Windows) | ✅ (macOS only) | ✅ (Windows only) | Planned in Q1-2025 | ⛔️ |
 
 ## Roadmap
 
-Q1 - 2024: 
+Q1 - 2025: 
 - Direct upload to Google Play
 - Direct upload to TestFlight / AppStore
-
-Q2 - 2024:
 - MacCatalyst publish
 
 ## Installation
@@ -63,7 +61,7 @@ Initiates the process of publishing a .NET MAUI app for the Windows platform. Us
 `MAUI Archive: iOS - List of Provisioning Profiles`
 Lists all available provisioning profiles installed on the machine for iOS projects.
 
-`MAUI Archive: Android - List of Keystores & Check Signature`
+`MAUI Archive: Android - Check Signature of keystore`
 Lists all keystores. Additionally, allows users to check the signature of a selected keystore.
 
 `MAUI Archive: Android - Generate Code Signing Key`
@@ -87,13 +85,15 @@ Opens the settings for the MAUI Archive extension, allowing users to configure p
 | Setting name | Description | Default Value |
 | --- | --- | --- |
 | Build configuration | You can specify a custom build configuration when publishing your apps | 'Release' |
-| Dotnet version | You can specify a custom dotnet version like net7.0 when publishing your apps | 'net8.0' |
+| Dotnet version | You can specify a custom dotnet version like net7.0 when publishing your apps | 'net9.0' |
 | Enable Solution file format | When searching the workspace for .csproj files, this setting enabled the discovery of .sln files aswell | 'false' |
 | Android keystore directory | You can specify a custom directory path to your Android keystore files | - |
-| Custom keytool path | You can specify a custom path to JDK's keytool binary. | - |
+| Android key tool path | Set a custom directory where your Android keystores are located at. Leave blank for default. | - |
+| Android JDK version | Set the version for compatibility with Java Development kit. Get the version with 'java --version' Recommended: Microsoft OpenJDK 17 or up. | 'jdk17+' |
 | Use explicit Android version | You can specify a custom version of Android to use as a target framework | - |
 | iOS Runtime identifier | You can change the default architeture for iOS apps | 'ios-arm64' |
 | Use explicit iOS version | You can specify a custom version of iOS to use as a target framework | - |
+| iOS Provisioning profiles path | Set a custom directory where your iOS Provisioning Profiles are located at. Leave blank for default. (Developer/XCode/UserData/ProvisioningProfiles) | - |
 | Use explicit Windows version | You can specify a custom version of Windows to use as a target framework. Always use a value, do not leave it blank | '10.0.19041.0' |
 
 ## Issues / feedback
@@ -111,5 +111,5 @@ For major changes, please open a discussion first.
 
 ### Acknowledgements
 
-Thanks to Gerald Versluis for spreading the word about this tool.
+Thanks to Gerald Versluis and James Montemagno for spreading the word about this tool.
 
