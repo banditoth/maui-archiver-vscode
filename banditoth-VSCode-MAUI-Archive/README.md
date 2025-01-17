@@ -15,14 +15,13 @@ Whether you're targeting Android, iOS, or Windows platforms, this extension equi
 
 | Android | iOS | Windows | MacCatalyst | Tizen |
 | --- | --- | --- | --- | --- | 
-| ✅ (macOS/Windows) | ✅ (macOS only) | ✅ (Windows only) | Planned in Q1-2025 | ⛔️ |
+| ✅ (macOS/Windows) | ✅ (macOS only) | ✅ (Windows only) | ✅ (macOS only, from version 1.2) | ⛔️ |
 
 ## Roadmap
 
 Q1 - 2025: 
 - Direct upload to Google Play
 - Direct upload to TestFlight / AppStore
-- MacCatalyst publish
 
 ## Installation
 
@@ -56,10 +55,13 @@ Initiates the process of publishing a .NET MAUI app for the iOS platform. Users 
 `MAUI Archive: Publish Windows`
 Initiates the process of publishing a .NET MAUI app for the Windows platform. Users can choose between packaged and non packaged apps.
 
+`MAUI Archive: Publish macOS`
+Initiates the process of publishing a .NET MAUI app for the macOS platform. Users can choose between signed and non signed apps, and choose a distribution method.
+
 ### Additional commands
 
-`MAUI Archive: iOS - List of Provisioning Profiles`
-Lists all available provisioning profiles installed on the machine for iOS projects.
+`MAUI Archive: Apple - List of Provisioning Profiles (iOS/macOS)`
+Lists all available provisioning profiles installed on the machine for iOS/macOS projects.
 
 `MAUI Archive: Android - Check Signature of keystore`
 Lists all keystores. Additionally, allows users to check the signature of a selected keystore.
@@ -72,6 +74,7 @@ Prompts the required paramters and executes the necessary command (`keytool -gen
 `MAUI Archive: Documentation of publishing Android apps (Microsoft)`
 `MAUI Archive: Documentation of publishing iOS apps (Microsoft)`
 `MAUI Archive: Documentation of publishing Windows apps (Microsoft)`
+`MAUI Archive: Documentation of publishing macOS apps (Microsoft)`
 
 Opens the browser with additional information about the archive / publish process of each platform (learn.microsoft.com)
 

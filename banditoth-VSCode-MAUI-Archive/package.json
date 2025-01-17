@@ -46,11 +46,11 @@
       },
       {
         "command": "banditoth-maui-archive.listProvisioningProfiles",
-        "title": "MAUI Archive: iOS - List of provisioning profiles"
+        "title": "MAUI Archive: Apple - List of provisioning profiles (iOS/macOS)"
       },
       {
         "command": "banditoth-maui-archive.listSigningIdentities",
-        "title": "MAUI Archive: iOS - List of signing identities"
+        "title": "MAUI Archive: Apple - List of signing identities (iOS/macOS)"
       },
       {
         "command": "banditoth-maui-archive.checkKeyStoreSign",
@@ -79,6 +79,14 @@
       {
         "command": "banditoth-maui-archive.publishWindows",
         "title": "MAUI Archive: Publish Windows"
+      },
+      {
+        "command": "banditoth-maui-archive.publishMacCatalyst",
+        "title": "MAUI Archive: Publish macOS"
+      },
+      {
+        "command": "banditoth-maui-archive.macCatalystTutorial",
+        "title": "MAUI Archive: Documentation of publishing macOS apps (Microsoft)"
       }
     ],
     "configuration": {
