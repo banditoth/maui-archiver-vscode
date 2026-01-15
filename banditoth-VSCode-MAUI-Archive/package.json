@@ -100,7 +100,7 @@
         },
         "VSCode-MAUI-Archive.dotnetVersion": {
           "type": "string",
-          "default": "net9.0",
+          "default": "net10.0",
           "description": "Determines dotnet version to use"
         },
         "VSCode-MAUI-Archive.enableSolutionFileFormat": {
